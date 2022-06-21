@@ -1,54 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using Entity;
+using UnityEditor;
 using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Tank tank;
+    private Tank _tank;
 
     public Sprite tankUp;
     public Sprite tankDown;
     public Sprite tankLeft;
     public Sprite tankRight;
-    private TankMover tankMover;
-    private CameraController cameraController;
+    private TankMover _tankMover;
+    private CameraController _cameraController;
     private SpriteRenderer _renderer;
-    public GameObject camera;
+    public new GameObject camera;
 
-    void Start()
+    private void Start()
     {
-        tank = new Tank
+        _tank = new Tank
         {
             Name = "Default",
             Direction = Direction.Down,
             Hp = 10,
             Point = 0,
-            Position = new Vector3(Random.Range(0, 20), Random.Range(0, 20), 0)
+            Position = new Vector3(Random.Range(0, 20), Random.Range(0, 20), 0),
+            Guid = GUID.Generate()
         };
-        gameObject.transform.position = tank.Position;
-        tankMover = gameObject.GetComponent<TankMover>();
-        cameraController = camera.GetComponent<CameraController>();
+        gameObject.transform.position = _tank.Position;
+        _tankMover = gameObject.GetComponent<TankMover>();
+        _cameraController = camera.GetComponent<CameraController>();
         _renderer = gameObject.GetComponent<SpriteRenderer>();
+        Move(Direction.Down);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             Move(Direction.Left);
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             Move(Direction.Down);
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             Move(Direction.Right);
         }
-        else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             Move(Direction.Up);
         }
@@ -56,22 +57,26 @@ public class TankController : MonoBehaviour
 
     private void Move(Direction direction)
     {
-        cameraController.Move(tankMover.Move(direction));
-        switch (direction)
+        _tank.Position = _tankMover.Move(direction);
+        _tank.Direction = direction;
+        _cameraController.Move(_tank.Position);
+        _renderer.sprite = direction switch
         {
-            case Direction.Down:
-                _renderer.sprite = tankDown;
-                break;
+            Direction.Down => tankDown,
+            Direction.Up => tankUp,
+            Direction.Left => tankLeft,
+            Direction.Right => tankRight,
+            _ => _renderer.sprite
+        };
+    }
 
-            case Direction.Up:
-                _renderer.sprite = tankUp;
-                break;
-            case Direction.Left:
-                _renderer.sprite = tankLeft;
-                break;
-            case Direction.Right:
-                _renderer.sprite = tankRight;
-                break;
-        }
+    private void Fire()
+    {
+        var b = new Bullet
+        {
+            Direction = _tank.Direction,
+            Tank = _tank
+        };
+        
     }
 }
