@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 658675346, guid: a77168ab521034ef8b7b80b9dd64708e, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 519420028}
+    - target: {fileID: 711902216727361652, guid: a77168ab521034ef8b7b80b9dd64708e, type: 3}
+      propertyPath: delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711902216727361652, guid: a77168ab521034ef8b7b80b9dd64708e, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1072091300885886469, guid: a77168ab521034ef8b7b80b9dd64708e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -277,41 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac147f80bbb347f3978870c15c3838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &658675344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2185695495001854551, guid: a77168ab521034ef8b7b80b9dd64708e, type: 3}
-  m_PrefabInstance: {fileID: 246376417}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &658675345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658675344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce52482f72ca442e6b3880f73fb4f360, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
---- !u!114 &658675346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658675344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d734fd77aae440649442faa0a890101, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tankUp: {fileID: 21300000, guid: c2500d85418f749429defd72247fa182, type: 3}
-  tankDown: {fileID: 21300000, guid: 5961b410be50c40db80d4336eb9ba4f6, type: 3}
-  tankLeft: {fileID: 21300000, guid: 13bdef6e50b2c4a339bafdc7f7f58ff4, type: 3}
-  tankRight: {fileID: 21300000, guid: f59f1eac0661d4c9ba950e0e5d444b6d, type: 3}
-  camera: {fileID: 519420028}
 --- !u!1001 &1348531006
 PrefabInstance:
   m_ObjectHideFlags: 0

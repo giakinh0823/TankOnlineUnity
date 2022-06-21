@@ -1,4 +1,6 @@
+using DefaultNamespace;
 using Entity;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,6 +55,11 @@ public class TankController : MonoBehaviour
         {
             Move(Direction.Up);
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Fire();
+        }
     }
 
     private void Move(Direction direction)
@@ -75,8 +82,9 @@ public class TankController : MonoBehaviour
         var b = new Bullet
         {
             Direction = _tank.Direction,
-            Tank = _tank
+            Tank = _tank,
+            InitialPosition = _tank.Position
         };
-        
+        GetComponent<TankFirer>().Fire(b);
     }
 }

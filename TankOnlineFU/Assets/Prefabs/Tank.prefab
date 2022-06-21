@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 1425215670684244316}
   - component: {fileID: 4826357125318977210}
   - component: {fileID: -3123017275022041457}
+  - component: {fileID: 658675345}
+  - component: {fileID: 658675346}
+  - component: {fileID: 711902216727361652}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -115,3 +118,54 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.23849964, y: 0.23849967, z: 0.2}
   m_Center: {x: -0.0023970604, y: 0.0095882565, z: 0}
+--- !u!114 &658675345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185695495001854551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce52482f72ca442e6b3880f73fb4f360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+--- !u!114 &658675346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185695495001854551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d734fd77aae440649442faa0a890101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankUp: {fileID: 21300000, guid: c2500d85418f749429defd72247fa182, type: 3}
+  tankDown: {fileID: 21300000, guid: 5961b410be50c40db80d4336eb9ba4f6, type: 3}
+  tankLeft: {fileID: 21300000, guid: 13bdef6e50b2c4a339bafdc7f7f58ff4, type: 3}
+  tankRight: {fileID: 21300000, guid: f59f1eac0661d4c9ba950e0e5d444b6d, type: 3}
+  camera: {fileID: 0}
+--- !u!114 &711902216727361652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185695495001854551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb23512406054bfebb417dfedf21e7a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7740309687340280598, guid: 1eaa100cee44c4f839e12948bcb5c44a, type: 3}
+  spriteRight: {fileID: 21300000, guid: 97ce0d674edfe418cabcd19ce0f5b6da, type: 3}
+  spriteLeft: {fileID: 21300000, guid: 6783b99fa46ad430680016ebeb8ea713, type: 3}
+  spriteUp: {fileID: 21300000, guid: 27a8e2e75693e4e69ade2de1a9ac6ce3, type: 3}
+  spriteDown: {fileID: 21300000, guid: c809315d9e24d474ba994bee424cf98c, type: 3}
+  speed: 2
+  maxRange: 10
+  delay: 1
+  lastFire: 0
