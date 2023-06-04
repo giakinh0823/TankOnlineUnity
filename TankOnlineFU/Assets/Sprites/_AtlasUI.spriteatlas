@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _AtlasUI
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 512
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 054975560de194215ac8937431385f00, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 101079708e1d942d195099c5ab788117, type: 3}
+  - {fileID: 21300000, guid: 2fdc0fa0466e84a7ba067bc5d002abdc, type: 3}
+  - {fileID: 21300000, guid: 054c6ed00a4a74a38b3c8b5bca748683, type: 3}
+  - {fileID: 21300000, guid: 1e73f7c192f744a72b9321a989f09657, type: 3}
+  - {fileID: 21300000, guid: 26ddede2237d2416389e345f72f582bd, type: 3}
+  - {fileID: 21300000, guid: b82f8493f8e1f4da99372663ff7c3aa4, type: 3}
+  - {fileID: 21300000, guid: c55ec654cdcd9430c978e4893929eced, type: 3}
+  - {fileID: 21300000, guid: 887f5465e473243f581b801e252aee71, type: 3}
+  - {fileID: 21300000, guid: 7b02e1951d3e04b4f8930094af46e8a2, type: 3}
+  - {fileID: 21300000, guid: 2a4cddd763a0a4e40bc217fba67a84b0, type: 3}
+  - {fileID: 21300000, guid: 6d7a7b08da6e146a9b91649447f88cf7, type: 3}
+  - {fileID: 21300000, guid: 164b9388ce53d471fb5deeeddfce0502, type: 3}
+  - {fileID: 21300000, guid: 243d95b8839054cffa78763606d6d81d, type: 3}
+  - {fileID: 21300000, guid: 9ab3faf8f40324c3a80dd5609c383910, type: 3}
+  - {fileID: 21300000, guid: 59e9410a32369430cb3a6c43d1edca66, type: 3}
+  - {fileID: 21300000, guid: 995e90ea29067434b9d415f0815ba3da, type: 3}
+  - {fileID: 21300000, guid: 5527ac1ca157e499fbb50ef3e93182ee, type: 3}
+  - {fileID: 21300000, guid: 933c267e6d3fb4ea2a4b260f89d65c3b, type: 3}
+  - {fileID: 21300000, guid: b9b3902f3badc424e9df4aa1cd1273c3, type: 3}
+  - {fileID: 21300000, guid: b926739fbf5c84a078bf121eff8d3f62, type: 3}
+  - {fileID: 21300000, guid: 2f993bdf4b0e64da6b077420d0a60f0a, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - enemy
+  - button-a
+  - button-start
+  - powerup-star
+  - base
+  - base_destroyed
+  - namcot
+  - game-over
+  - d-pad
+  - powerup-helmet
+  - powerup-timer
+  - powerup-shovel
+  - battle-city
+  - arrow
+  - button-b
+  - powerup-grenade
+  - lives
+  - button-select
+  - flag
+  - copyright
+  - powerup-tank
+  m_RenderDataMap: {}
+  m_Tag: _AtlasUI
+  m_IsVariant: 0

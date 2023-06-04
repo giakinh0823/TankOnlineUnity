@@ -1,0 +1,215 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: _AtlasBattle
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 85127f8459d5547aa83500d9cbca28a9, type: 3}
+    - {fileID: 102900000, guid: e1b5e82d47ba64149962a293ddd0b350, type: 3}
+    - {fileID: 102900000, guid: daac48475b8414143993494e7bffd21f, type: 3}
+    - {fileID: 102900000, guid: a2e4c50199f144144abe96eee85b7000, type: 3}
+    - {fileID: 102900000, guid: e4bd1ca1ab4ae4465b7a226607a55a92, type: 3}
+    - {fileID: 102900000, guid: 95526345292724dccbe9c50470da6c2e, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 74bcd400ab2a54f328bb65fbedcc9ecf, type: 3}
+  - {fileID: 21300000, guid: 5961b410be50c40db80d4336eb9ba4f6, type: 3}
+  - {fileID: 21300000, guid: cb9f4b50253c24d7ebf1b321c2137ad4, type: 3}
+  - {fileID: 21300000, guid: 01bc5290401084fca91f31d584ac0c72, type: 3}
+  - {fileID: 21300000, guid: 7a286da0cd99a4d4e9494a78120c2673, type: 3}
+  - {fileID: 21300000, guid: 4a76a7c07f8f246b998b5ef3cefb7501, type: 3}
+  - {fileID: 21300000, guid: 75a5e5f03ad0f4f7fa573ab9a64689b1, type: 3}
+  - {fileID: 21300000, guid: 7aa1a1319391b4d65b94d87f32d77399, type: 3}
+  - {fileID: 21300000, guid: 7d58086183e78419d9d46ccd81816a7c, type: 3}
+  - {fileID: 21300000, guid: 7dac70c1f672a4b1a8d0098638066613, type: 3}
+  - {fileID: 21300000, guid: 2dcdfdf15ae0e4a7a8580c4615808931, type: 3}
+  - {fileID: 21300000, guid: 587fe822b2c93480d81350bd39aceb22, type: 3}
+  - {fileID: 21300000, guid: e1d65952756844c4f90bf8c84cd6d127, type: 3}
+  - {fileID: 21300000, guid: 5e3d4b62421fd456b9475a9d4223b8be, type: 3}
+  - {fileID: 21300000, guid: da566c62a16d44ce0989289b0674951e, type: 3}
+  - {fileID: 21300000, guid: 378e19b2ad0fd482ca99aceea8006070, type: 3}
+  - {fileID: 21300000, guid: ef930833b17ba4a3d982e128e1f176bc, type: 3}
+  - {fileID: 21300000, guid: e45897a35c94e4c66971fbf79e750b3a, type: 3}
+  - {fileID: 21300000, guid: 82468ba3e7b614ecd90fe655fd761bd6, type: 3}
+  - {fileID: 21300000, guid: 70c32ac3cd25d4467a8befcb90fbf770, type: 3}
+  - {fileID: 21300000, guid: d7efb024d44144368aa4a9645f85a533, type: 3}
+  - {fileID: 21300000, guid: f2548d05a2c544d568815f12cfc9bdc7, type: 3}
+  - {fileID: 21300000, guid: 74f02345f17994e46ba7adfcf629ac76, type: 3}
+  - {fileID: 21300000, guid: 1ca1be7579035486a95b0bbba883b4fc, type: 3}
+  - {fileID: 21300000, guid: ead821859f68c48e0bbcc0ad1d5f71d9, type: 3}
+  - {fileID: 21300000, guid: c2500d85418f749429defd72247fa182, type: 3}
+  - {fileID: 21300000, guid: 9ea458d5d84a44acf9f7beb18c22fc47, type: 3}
+  - {fileID: 21300000, guid: d526c8d5df352460bb261cabe3e94852, type: 3}
+  - {fileID: 21300000, guid: 09bb7de6d015e4e95a93b5fc14fb7f2f, type: 3}
+  - {fileID: 21300000, guid: 1887591749ceb4d22af3f0ccfd6a4db0, type: 3}
+  - {fileID: 21300000, guid: cfe51237363eb45d7829e8bb019bc238, type: 3}
+  - {fileID: 21300000, guid: 7b3bfa672805342a0898f72d69aa3904, type: 3}
+  - {fileID: 21300000, guid: 97ce0d674edfe418cabcd19ce0f5b6da, type: 3}
+  - {fileID: 21300000, guid: 46505e97e7ca147f2b5c79d63126510e, type: 3}
+  - {fileID: 21300000, guid: 27a8e2e75693e4e69ade2de1a9ac6ce3, type: 3}
+  - {fileID: 21300000, guid: 6088e3e722f6541d0afeae773fc5cc21, type: 3}
+  - {fileID: 21300000, guid: e855e788b271d45a3a6bc2945fdf8435, type: 3}
+  - {fileID: 21300000, guid: 91e996d82808e4ff8ac844337ec4367d, type: 3}
+  - {fileID: 21300000, guid: 1382dad885b5c44f9b65da95c0842dd4, type: 3}
+  - {fileID: 21300000, guid: b5430149c99874af48a6ef4bd6bbfe9c, type: 3}
+  - {fileID: 21300000, guid: fbf45549bf13a4097b66cb4ea1036a59, type: 3}
+  - {fileID: 21300000, guid: 327052a98c04c49429e0e14275f5add4, type: 3}
+  - {fileID: 21300000, guid: 719a54b9b07154014bc91b61477532be, type: 3}
+  - {fileID: 21300000, guid: f17843e9c6979468093aeab831b06f70, type: 3}
+  - {fileID: 21300000, guid: a29b214a7d6534e77b5a3986e92b8995, type: 3}
+  - {fileID: 21300000, guid: c903074a71c384a2c9abce9b6c2293c9, type: 3}
+  - {fileID: 21300000, guid: c33c174a49e7f407985d3cbd716958f2, type: 3}
+  - {fileID: 21300000, guid: 01fc5b5a7bf3a4f3b8c163fa653bc2bf, type: 3}
+  - {fileID: 21300000, guid: 36c3b37a524824b239dfd0ac8979f295, type: 3}
+  - {fileID: 21300000, guid: 4f1ea5aac006c42948a6c9c0b2d976de, type: 3}
+  - {fileID: 21300000, guid: cc7bc85b6d37e459c9e33f5dea79eb7b, type: 3}
+  - {fileID: 21300000, guid: 4d0c2a9b1ff6d4e87be97467fe2fc0a0, type: 3}
+  - {fileID: 21300000, guid: 9b504dabcaa0346de8804b5d9c02f9fb, type: 3}
+  - {fileID: 21300000, guid: ab0731fb944b4457da3a9f1d1eddd3d7, type: 3}
+  - {fileID: 21300000, guid: 563bd17cd22584b779705629a505e76b, type: 3}
+  - {fileID: 21300000, guid: 3f053b7c72ff84dfeabdfc1c692485a7, type: 3}
+  - {fileID: 21300000, guid: 11be129c16114401796b80f3a731c488, type: 3}
+  - {fileID: 21300000, guid: f59f1eac0661d4c9ba950e0e5d444b6d, type: 3}
+  - {fileID: 21300000, guid: 84c4d3cc63825449f8464b73163ceff2, type: 3}
+  - {fileID: 21300000, guid: 2ffcdf1d4fac443a3a034eb9f57df6a0, type: 3}
+  - {fileID: 21300000, guid: 7be9304d971a44fa08c8909db89c7cac, type: 3}
+  - {fileID: 21300000, guid: c809315d9e24d474ba994bee424cf98c, type: 3}
+  - {fileID: 21300000, guid: 99d7615df901b46ba88869d393d00421, type: 3}
+  - {fileID: 21300000, guid: 2428f88d6ccc4441fbdcb7842e2a3310, type: 3}
+  - {fileID: 21300000, guid: 3b3a9f9d8f8fc428faa5756032cfea3f, type: 3}
+  - {fileID: 21300000, guid: 60df1d1ec124141dca6ed7e58230141b, type: 3}
+  - {fileID: 21300000, guid: 1e664e1e199bb4e089fcc8c4879a5070, type: 3}
+  - {fileID: 21300000, guid: e093b44eae4014f5d9f327e871b8b8e3, type: 3}
+  - {fileID: 21300000, guid: 13bdef6e50b2c4a339bafdc7f7f58ff4, type: 3}
+  - {fileID: 21300000, guid: 000760de5e76c4ed4b3d7d4e76cdfd0f, type: 3}
+  - {fileID: 21300000, guid: d6e9a34f8ce0945b484dc6d721dd4c61, type: 3}
+  - {fileID: 21300000, guid: 6783b99fa46ad430680016ebeb8ea713, type: 3}
+  - {fileID: 21300000, guid: d36c6a9fae4ce47fb9abb58f5da2a1a4, type: 3}
+  - {fileID: 21300000, guid: 80328ebf611994454b51902c2205244b, type: 3}
+  - {fileID: 21300000, guid: af50d8cfe27254d50bf8fe78a6315f3a, type: 3}
+  - {fileID: 21300000, guid: 91aa2aefb65e1468d9868e85c8717f84, type: 3}
+  - {fileID: 21300000, guid: 8fe24eefa9c1c42879a4084847030539, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - gold-tank-right-3
+  - gold-tank-down-4
+  - silver-tank-up-4
+  - shield-1
+  - big-explosion-3
+  - appear-3
+  - red-tank-left-4
+  - red-tank-right-1
+  - silver-tank-left-3
+  - big-explosion-1
+  - red-tank-right-2
+  - wall-brick
+  - silver-tank-right-2
+  - points_200
+  - bullet-explosion-1
+  - red-tank-up-2
+  - white-line
+  - silver-tank-down-4
+  - silver-tank-left-1
+  - red-tank-down-4
+  - silver-tank-up-3
+  - shield-2
+  - points_300
+  - red-tank-left-3
+  - points_400
+  - gold-tank-up-4
+  - points_500
+  - silver-tank-down-2
+  - silver-tank-down-1
+  - silver-tank-right-3
+  - bullet-explosion-2
+  - silver-tank-down-3
+  - bullet-right
+  - red-tank-down-3
+  - bullet-up
+  - gold-tank-down-2
+  - silver-tank-up-1
+  - big-explosion-2
+  - gold-tank-down-3
+  - silver-tank-right-4
+  - points-100
+  - gold-tank-up-2
+  - appear-2
+  - red-tank-left-2
+  - silver-tank-left-4
+  - red-tank-right-4
+  - red-tank-left-1
+  - silver-tank-left-2
+  - red-tank-up-3
+  - gold-tank-left-3
+  - red-tank-up-4
+  - appear-1
+  - gold-tank-left-2
+  - water-2
+  - gold-tank-up-1
+  - red-tank-down-2
+  - big-explosion-5
+  - gold-tank-right-4
+  - gold-tank-down-1
+  - appear-4
+  - water-1
+  - bullet-down
+  - bullet-explosion-3
+  - gold-tank-left-1
+  - gold-tank-right-1
+  - big-explosion-4
+  - red-tank-up-1
+  - silver-tank-up-2
+  - gold-tank-left-4
+  - silver-tank-right-1
+  - trees
+  - bullet-left
+  - red-tank-right-3
+  - red-tank-down-1
+  - gold-tank-right-2
+  - gold-tank-up-3
+  - wall-steel
+  m_RenderDataMap: {}
+  m_Tag: _AtlasBattle
+  m_IsVariant: 0
