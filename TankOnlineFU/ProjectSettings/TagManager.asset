@@ -7,17 +7,18 @@ TagManager:
   - Enemy
   - bullet
   - bulletEnemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Brick
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Rock
+  - Tank
+  - Bush
+  - Bullet
   - 
   - 
   - 

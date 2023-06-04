@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Tank;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    [field: SerializeField]
+    public TankController MainTank { get; set; }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if (this.MainTank)
+            this.Move(this.MainTank.transform.position);
     }
 
     public void Move(Vector3 v)
     {
-        Move(v.x, v.y);
+        this.Move(v.x, v.y);
     }
 
     public void Move(float x, float y)
     {
-        var o = gameObject;
-        o.transform.position = new Vector3(x, y, o.transform.position.z);
+        this.transform.position = new Vector3(x, y, this.transform.position.z);
     }
 }
