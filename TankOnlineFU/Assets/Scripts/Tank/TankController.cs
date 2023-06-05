@@ -2,14 +2,15 @@ namespace Tank
 {
 
     using System;
+    using System.Threading.Tasks;
     using Bullet;
     using Entity;
-    using Photon.Pun;
     using TMPro;
+    using UI;
     using UnityEngine;
+    using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
-    [RequireComponent(typeof(PhotonTankView))]
     public class TankController : MonoBehaviour
     {
         public Sprite tankUp;
@@ -27,7 +28,10 @@ namespace Tank
         public TMP_Text TextNickname { get; private set; }
 
         [field: SerializeField]
-        public Slider SliderHP { get; private set; }
+        public Slider SliderHp { get; private set; }
+
+        [field: SerializeField]
+        public ControlKeymap Keymap { get; set; }
 
         private float lastFire;
 
@@ -64,18 +68,10 @@ namespace Tank
 
         public BulletPool BulletPool { get; private set; }
 
-        public PhotonView PhotonView { get; private set; }
-
-        public void EarnDamage(int damage)
-        {
-            this.Health -= damage;
-        }
-        
         private void Awake()
         {
             this.SpriteRenderer = this.GetComponent<SpriteRenderer>();
             this.Rigidbody2D    = this.GetComponent<Rigidbody2D>();
-            this.PhotonView     = this.GetComponent<PhotonView>();
             this.BulletPool     = FindObjectOfType<BulletPool>();
 
             this.Move(Direction.Down);
@@ -83,36 +79,42 @@ namespace Tank
 
         private void Update()
         {
-            this.TextNickname.text = PhotonNetwork.NickName;
-            this.SliderHP.value    = this.Health / 100f;
+            this.SliderHp.value = this.Health / 100f;
         }
 
         private void FixedUpdate()
         {
-            if (!this.PhotonView.IsMine) return;
-
             var direction = Direction.None;
 
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(this.Keymap.Left))
                 direction |= Direction.Left;
 
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(this.Keymap.Right))
                 direction |= Direction.Right;
 
             if (direction == Direction.None)
             {
-                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                if (Input.GetKey(this.Keymap.Down))
                     direction |= Direction.Down;
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                if (Input.GetKey(this.Keymap.Up))
                     direction |= Direction.Up;
             }
 
             this.Move(direction);
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(this.Keymap.Fire)) this.Fire();
+        }
+
+        public async void TakeDamage(int damage)
+        {
+            this.Health -= damage;
+
+            if (this.Health <= 0)
             {
-                this.PhotonView.RPC(nameof(this.Fire), RpcTarget.All);
+                Destroy(this.gameObject);
+                await Task.Delay(1000);
+                MapChooser.Instance.gameObject.SetActive(true);
             }
         }
 
@@ -140,7 +142,6 @@ namespace Tank
             this.Direction = direction;
         }
 
-        [PunRPC]
         private void Fire()
         {
             var currentDirection = this.Direction;
@@ -151,7 +152,7 @@ namespace Tank
             bullet.transform.position = this.transform.position;
 
             bullet.Direction      = currentDirection;
-            bullet.Speed          = .5f;
+            bullet.Speed          = 8f;
             bullet.TankController = this;
             bullet.InitPos        = this.transform.position;
             bullet.MaxRange       = 10;

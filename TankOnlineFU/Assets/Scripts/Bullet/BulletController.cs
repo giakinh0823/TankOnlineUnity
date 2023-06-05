@@ -4,6 +4,7 @@ namespace Bullet
     using Entity;
     using Tank;
     using UnityEngine;
+    using UnityEngine.Tilemaps;
     using UnityObjectPool;
 
     public class BulletController : MonoBehaviour, IPooledObject<BulletController>
@@ -33,20 +34,20 @@ namespace Bullet
             switch (this.Direction)
             {
                 case Direction.Down:
-                    this.transform.rotation = Quaternion.Euler(0, 0, 180);
-                    this.Rigidbody2D.AddForce(Vector2.down * this.Speed, ForceMode2D.Impulse);
+                    this.transform.rotation   = Quaternion.Euler(0, 0, 180);
+                    this.Rigidbody2D.velocity = Vector2.down * this.Speed;
                     break;
                 case Direction.Up:
-                    this.transform.rotation = Quaternion.Euler(0, 0, 0);
-                    this.Rigidbody2D.AddForce(Vector2.up * this.Speed, ForceMode2D.Impulse);
+                    this.transform.rotation   = Quaternion.Euler(0, 0, 0);
+                    this.Rigidbody2D.velocity = Vector2.up * this.Speed;
                     break;
                 case Direction.Right:
-                    this.transform.rotation = Quaternion.Euler(0, 0, -90);
-                    this.Rigidbody2D.AddForce(Vector2.right * this.Speed, ForceMode2D.Impulse);
+                    this.transform.rotation   = Quaternion.Euler(0, 0, -90);
+                    this.Rigidbody2D.velocity = Vector2.right * this.Speed;
                     break;
                 case Direction.Left:
-                    this.transform.rotation = Quaternion.Euler(0, 0, 90);
-                    this.Rigidbody2D.AddForce(Vector2.left * this.Speed, ForceMode2D.Impulse);
+                    this.transform.rotation   = Quaternion.Euler(0, 0, 90);
+                    this.Rigidbody2D.velocity = Vector2.left * this.Speed;
                     break;
                 case Direction.None:
                 default:
@@ -58,11 +59,22 @@ namespace Bullet
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other is not { gameObject: { layer: (int)Layers.Tank } }) return;
+            if (other is not { gameObject: { layer: (int)Layers.Tank } })
+            {
+                if (other is { gameObject: { layer: (int)Layers.Brick } })
+                {
+                    var tileMap = other.GetComponent<Tilemap>();
+                    var cellPos = tileMap.WorldToCell(this.transform.position + this.transform.up * .2f);
+                    tileMap.SetTile(cellPos, null);
+                }
+
+                this.ObjectPool.Release(this);
+                return;
+            }
 
             if (this.TankController.gameObject == other.gameObject) return;
 
-            other.gameObject.GetComponent<TankController>().Health -= 10;
+            other.GetComponent<TankController>()?.TakeDamage(10);
             this.ObjectPool.Release(this);
         }
 

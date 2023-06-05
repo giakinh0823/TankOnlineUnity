@@ -12,7 +12,7 @@ namespace Entity
         Rock,
         Tank,
         Bush,
-        Bullet,
+        Bullet
     }
 
 }

@@ -1,37 +1,71 @@
 namespace Map
 {
 
-    using System.Collections.Generic;
-    using Photon.Pun;
+    using Entity;
     using Tank;
     using UnityEngine;
 
     public class MapController : MonoBehaviour
     {
         [field: SerializeField]
-        public GameObject TankPrefab { get; private set; }
+        public GameObject TankPrefabA { get; private set; }
+
+        [field: SerializeField]
+        public GameObject TankPrefabB { get; private set; }
 
         public Map CurrentMap { get; private set; }
 
-        private void Awake()
+        private void PostSpawnMap()
         {
-            this.CurrentMap = this.SpawnMap("Map-1");
+            var randomPosA = this.CurrentMap.SpawnPositionsTeamA[
+                Random.Range(0, this.CurrentMap.SpawnPositionsTeamA.Length)
+            ];
+
+            var randomPosB = this.CurrentMap.SpawnPositionsTeamB[
+                Random.Range(0, this.CurrentMap.SpawnPositionsTeamB.Length)
+            ];
+
+            var tankA = Instantiate(
+                this.TankPrefabA,
+                this.CurrentMap.GetWorldPosition(randomPosA),
+                Quaternion.identity
+            ).GetComponent<TankController>();
+
+            var tankB = Instantiate(
+                this.TankPrefabB,
+                this.CurrentMap.GetWorldPosition(randomPosB),
+                Quaternion.identity
+            ).GetComponent<TankController>();
+
+            tankA.Keymap = new ControlKeymap
+            {
+                Up    = KeyCode.W,
+                Down  = KeyCode.S,
+                Left  = KeyCode.A,
+                Right = KeyCode.D,
+                Fire  = KeyCode.Space
+            };
+
+            tankB.Keymap = new ControlKeymap
+            {
+                Up    = KeyCode.UpArrow,
+                Down  = KeyCode.DownArrow,
+                Left  = KeyCode.LeftArrow,
+                Right = KeyCode.RightArrow,
+                Fire  = KeyCode.RightControl
+            };
+
+            FindObjectOfType<CameraController>().WrapBounds(this.CurrentMap.Tilemap.cellBounds);
         }
 
-        private void Start()
+        private void PreSpawnMap()
         {
-            var spawnedPosTeamA = new List<Vector3Int>(this.CurrentMap.SpawnPositionsTeamA);
-            var spawnedPosTeamB = new List<Vector3Int>(this.CurrentMap.SpawnPositionsTeamB);
-
-            var randomPos = GetRandomFromList(spawnedPosTeamA);
-
-            var photonGameObject = PhotonNetwork.Instantiate(this.TankPrefab.name, this.CurrentMap.GetWorldPosition(randomPos), Quaternion.identity);
-            FindObjectOfType<CameraController>().MainTank = photonGameObject.GetComponent<TankController>();
-
-            T GetRandomFromList<T>(IReadOnlyList<T> list)
+            foreach (Transform children in this.transform)
             {
-                return list[Random.Range(0, list.Count)];
+                Destroy(children.gameObject);
             }
+
+            foreach (var tankController in FindObjectsOfType<TankController>()) Destroy(tankController.gameObject);
         }
 
         public static string GetMapPath(string mapName)
@@ -41,6 +75,8 @@ namespace Map
 
         public Map SpawnMap(string mapName)
         {
+            this.PreSpawnMap();
+
             var mapPrefab = Resources.Load(GetMapPath(mapName));
 
             if (mapPrefab == null)
@@ -53,7 +89,11 @@ namespace Map
 
             Resources.UnloadUnusedAssets();
 
-            return (mapGameObject as GameObject)?.GetComponent<Map>();
+            this.CurrentMap = (mapGameObject as GameObject)?.GetComponent<Map>();
+
+            this.PostSpawnMap();
+
+            return this.CurrentMap;
         }
     }
 

@@ -1,24 +1,19 @@
-using Tank;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [field: SerializeField]
-    public TankController MainTank { get; set; }
+    public Camera Camera { get; private set; }
 
-    private void Update()
+    public void Awake()
     {
-        if (this.MainTank)
-            this.Move(this.MainTank.transform.position);
+        this.Camera = this.GetComponent<Camera>();
     }
 
-    public void Move(Vector3 v)
+    public void WrapBounds(BoundsInt boundsInt)
     {
-        this.Move(v.x, v.y);
-    }
+        this.Camera.transform.position = new Vector3(boundsInt.center.x, boundsInt.center.y, this.Camera.transform.position.z);
 
-    public void Move(float x, float y)
-    {
-        this.transform.position = new Vector3(x, y, this.transform.position.z);
+        var aspectRatio = (float)Screen.width / Screen.height;
+        this.Camera.orthographicSize = Mathf.Max(boundsInt.size.x, boundsInt.size.y) / 2f / aspectRatio;
     }
 }
