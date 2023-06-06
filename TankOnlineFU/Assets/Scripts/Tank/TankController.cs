@@ -123,7 +123,10 @@ namespace Tank
             var currentPos = this.gameObject.transform.position;
 
             if (direction == Direction.None)
+            {
+                this.Rigidbody2D.velocity = Vector2.zero;
                 return;
+            }
 
             if (direction.HasFlag(Direction.Left))
                 currentPos.x -= this.Speed;

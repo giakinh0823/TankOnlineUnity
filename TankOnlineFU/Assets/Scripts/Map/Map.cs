@@ -52,6 +52,8 @@ namespace Map
             var waterTilemap = this.CreateSubTiles("Water", Layers.Water, SortingLayer.NameToID("BelowPlayer"), 0);
             var rockTilemap  = this.CreateSubTiles("Rock", Layers.Rock, SortingLayer.NameToID("BelowPlayer"), 0);
 
+            this.Tilemap.CompressBounds();
+            
             foreach (var pos in this.Tilemap.cellBounds.allPositionsWithin)
             {
                 var tile = this.Tilemap.GetTile(pos);
@@ -111,7 +113,6 @@ namespace Map
 
             tileMapRenderer.sortingLayerID = sortingLayerId;
             tileMapRenderer.sortingOrder   = sortingInLayer;
-
             return tileMap;
         }
     }

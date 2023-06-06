@@ -52,7 +52,7 @@ namespace Map
                 Down  = KeyCode.DownArrow,
                 Left  = KeyCode.LeftArrow,
                 Right = KeyCode.RightArrow,
-                Fire  = KeyCode.RightControl
+                Fire  = KeyCode.RightShift
             };
 
             FindObjectOfType<CameraController>().WrapBounds(this.CurrentMap.Tilemap.cellBounds);

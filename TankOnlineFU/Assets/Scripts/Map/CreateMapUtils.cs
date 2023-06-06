@@ -1,6 +1,7 @@
 namespace Map
 {
 
+    // preprocessor 
 #if UNITY_EDITOR
     using UI;
     using UnityEditor;
@@ -12,7 +13,6 @@ namespace Map
         public static void CreateMap()
         {
             var prefab = Resources.Load<GameObject>(MapController.GetMapPath("MapBase"));
-            var clone  = Object.Instantiate(prefab);
             var path = EditorUtility.SaveFilePanelInProject(
                 "Save Map",
                 "Map-0",
@@ -22,6 +22,7 @@ namespace Map
 
             if (string.IsNullOrEmpty(path)) return;
 
+            var clone = Object.Instantiate(prefab);
             PrefabUtility.SaveAsPrefabAsset(clone, path);
             Object.DestroyImmediate(clone);
         }

@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     {
         this.Camera.transform.position = new Vector3(boundsInt.center.x, boundsInt.center.y, this.Camera.transform.position.z);
 
-        var aspectRatio = (float)Screen.width / Screen.height;
-        this.Camera.orthographicSize = Mathf.Max(boundsInt.size.x, boundsInt.size.y) / 2f / aspectRatio;
+        var aspectRatio = (float)Mathf.Max(Screen.width, Screen.height) / Mathf.Min(Screen.width, Screen.height);
+        this.Camera.orthographicSize = Mathf.Max(boundsInt.size.x, boundsInt.size.y) / 2f * aspectRatio;
     }
 }

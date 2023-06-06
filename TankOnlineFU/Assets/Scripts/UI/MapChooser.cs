@@ -28,11 +28,7 @@ namespace UI
             Instance = this;
 
             var mapNames = GetAllMapName();
-            this.Dropdown.options = new List<TMP_Dropdown.OptionData>(
-                mapNames.Select(e =>
-                                    new TMP_Dropdown.OptionData(e)
-                )
-            );
+            this.Dropdown.options = mapNames.Select(e => new TMP_Dropdown.OptionData(e)).ToList();
 
             this.Button.onClick.AddListener(this.OnClickStartGame);
         }
