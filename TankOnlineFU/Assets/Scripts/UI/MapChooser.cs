@@ -79,7 +79,7 @@ namespace UI
         {
             if (!this.CurrentMap) return;
             Destroy(this.CurrentMap.gameObject);
-            foreach (var tankController in FindObjectsByType<TankController>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            foreach (var tankController in FindObjectsOfType<TankController>())
             {
                 Destroy(tankController.gameObject);
             }
