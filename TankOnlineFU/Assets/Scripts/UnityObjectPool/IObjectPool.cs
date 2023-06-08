@@ -1,6 +1,5 @@
 namespace UnityObjectPool
 {
-
     using UnityEngine;
 
     public interface IObjectPool<TObject>

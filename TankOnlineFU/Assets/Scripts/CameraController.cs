@@ -9,11 +9,11 @@ public class CameraController : MonoBehaviour
         this.Camera = this.GetComponent<Camera>();
     }
 
-    public void WrapBounds(BoundsInt boundsInt)
+    public void WrapBounds(Bounds bounds)
     {
-        this.Camera.transform.position = new Vector3(boundsInt.center.x, boundsInt.center.y, this.Camera.transform.position.z);
+        this.Camera.transform.position = new Vector3(bounds.center.x, bounds.center.y, this.Camera.transform.position.z);
 
         var aspectRatio = (float)Mathf.Max(Screen.width, Screen.height) / Mathf.Min(Screen.width, Screen.height);
-        this.Camera.orthographicSize = Mathf.Max(boundsInt.size.x, boundsInt.size.y) / 2f * aspectRatio;
+        this.Camera.orthographicSize = Mathf.Max(bounds.size.x, bounds.size.y) / 2f * aspectRatio;
     }
 }

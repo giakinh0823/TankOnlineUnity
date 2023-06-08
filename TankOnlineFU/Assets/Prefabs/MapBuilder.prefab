@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4758866056091634821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4758866056091634822}
+  - component: {fileID: 4758866056091634873}
+  m_Layer: 0
+  m_Name: MapBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4758866056091634822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758866056091634821}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.34, y: 21.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4758866056091634873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758866056091634821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33cab2f336c74845bef6252ab9275f76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Brick>k__BackingField: {fileID: 11400000, guid: e69bb1e0f70da4f70a3461d400929bab, type: 2}
+  <Steel>k__BackingField: {fileID: 11400000, guid: 83c315ac3f21a43ac9d0881847f23b42, type: 2}
+  <Water>k__BackingField: {fileID: 11400000, guid: 675d11764136a4bd89554e37ea606b84, type: 2}
+  <Grass>k__BackingField: {fileID: 11400000, guid: 1ce4571c8cc81463f91b7eea7d4ab918, type: 2}
+  <SpawnA>k__BackingField: {fileID: 11400000, guid: 4f439c81f65fe414089c08178f9ba3ea, type: 2}
+  <SpawnB>k__BackingField: {fileID: 11400000, guid: b590bf76004ea41e594bf17dad8e02b5, type: 2}

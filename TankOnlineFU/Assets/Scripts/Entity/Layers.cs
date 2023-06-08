@@ -9,9 +9,9 @@ namespace Entity
         Brick,
         Water,
         UI,
-        Rock,
+        Steel,
         Tank,
-        Bush,
+        Grass,
         Bullet
     }
 

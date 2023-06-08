@@ -1,6 +1,5 @@
 namespace Bullet
 {
-
     using UnityEngine;
     using UnityObjectPool;
 
@@ -11,7 +10,7 @@ namespace Bullet
 
         protected override BulletController DoCreateNew()
         {
-            var bulletGameObject = Object.Instantiate(this.BulletPrefab, this.transform);
+            var bulletGameObject = Instantiate(this.BulletPrefab, this.transform);
             var bulletController = bulletGameObject.GetComponent<BulletController>();
             return bulletController;
         }

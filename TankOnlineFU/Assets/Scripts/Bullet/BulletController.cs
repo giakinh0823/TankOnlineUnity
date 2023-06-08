@@ -1,6 +1,5 @@
 namespace Bullet
 {
-
     using Entity;
     using Tank;
     using UnityEngine;

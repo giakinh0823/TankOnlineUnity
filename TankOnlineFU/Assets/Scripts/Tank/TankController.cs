@@ -1,14 +1,11 @@
 namespace Tank
 {
-
-    using System;
     using System.Threading.Tasks;
     using Bullet;
     using Entity;
     using TMPro;
     using UI;
     using UnityEngine;
-    using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
     public class TankController : MonoBehaviour

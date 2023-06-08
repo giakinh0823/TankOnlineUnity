@@ -1,6 +1,5 @@
 namespace Entity
 {
-
     using System;
 
     [Flags]
