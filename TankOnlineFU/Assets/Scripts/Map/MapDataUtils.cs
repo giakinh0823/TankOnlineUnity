@@ -1,5 +1,6 @@
 namespace Map
 {
+
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
@@ -7,7 +8,7 @@ namespace Map
 
     public static class MapDataUtils
     {
-        public const            string       MapDataPrefix = "MD";
+        public const string MapDataPrefix = "MD";
 
         public static HashSet<string> GetAllMapName()
         {
@@ -48,11 +49,20 @@ namespace Map
             var valueMapData = JsonConvert.SerializeObject(mapData);
             var allMapNames  = GetAllMapName();
 
-            allMapNames.Add(name);
+            if (mapData is not null)
+            {
+                allMapNames.Add(name);
+                PlayerPrefs.SetString(keyMapData, valueMapData);
+            }
+            else
+            {
+                allMapNames.Remove(name);
+                PlayerPrefs.DeleteKey(keyMapData);
+            }
 
             PlayerPrefs.SetString(keyMaps, JsonConvert.SerializeObject(allMapNames));
-            PlayerPrefs.SetString(keyMapData, valueMapData);
             PlayerPrefs.Save();
         }
     }
+
 }

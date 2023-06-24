@@ -1,5 +1,6 @@
 namespace UI
 {
+
     using System.Collections.Generic;
     using System.Linq;
     using Map;
@@ -11,6 +12,8 @@ namespace UI
 
     public class BuilderTools : MonoBehaviour
     {
+        public static string ForceBuildMap { get; set; }
+
         [field: SerializeField]
         public List<Tile> Tiles { get; private set; }
 
@@ -24,12 +27,15 @@ namespace UI
         public Button SaveButton { get; private set; }
 
         [field: SerializeField]
+        public Button BackButton { get; private set; }
+
+        [field: SerializeField]
         public Button PlayButton { get; private set; }
 
         [field: SerializeField]
         public TMP_InputField TextFieldMapName { get; private set; }
 
-        private Dictionary<Tile, Button> TileToButton { get; } = new();
+        private Dictionary<Tile, Button> TileToButton { get; } = new ();
 
         public Tile CurrentItem { get; private set; }
 
@@ -45,6 +51,19 @@ namespace UI
 
             this.SaveButton.onClick.AddListener(this.OnClickSaveMap);
             this.PlayButton.onClick.AddListener(this.OnClickPlayMap);
+            this.BackButton.onClick.AddListener(OnClickBack);
+        }
+
+        private void LoadMap(string mapName)
+        {
+            var (grid, spawnPosA, spawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(mapName));
+            
+            
+        }
+
+        private static void OnClickBack()
+        {
+            SceneManager.LoadScene("GameplayScene");
         }
 
         private void OnClickPlayMap()
@@ -127,4 +146,5 @@ namespace UI
             return button;
         }
     }
+
 }

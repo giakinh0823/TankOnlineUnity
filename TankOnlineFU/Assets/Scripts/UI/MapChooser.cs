@@ -1,5 +1,6 @@
 namespace UI
 {
+
     using System.Collections.Generic;
     using System.Linq;
     using Entity;
@@ -16,6 +17,8 @@ namespace UI
         public static string     ForcePlayingMap { get; set; }
         public static MapChooser Instance        { get; private set; }
 
+        #region Serialize Fields
+
         [field: SerializeField]
         public TMP_Dropdown Dropdown { get; private set; }
 
@@ -23,7 +26,13 @@ namespace UI
         public Button PlayButton { get; private set; }
 
         [field: SerializeField]
-        public Button BuildButton { get; private set; }
+        public Button CreateButton { get; private set; }
+
+        [field: SerializeField]
+        public Button EditButton { get; private set; }
+
+        [field: SerializeField]
+        public Button DeleteButton { get; private set; }
 
         [field: SerializeField]
         public MapBuilder MapBuilder { get; private set; }
@@ -34,6 +43,8 @@ namespace UI
         [field: SerializeField]
         public GameObject TankB { get; private set; }
 
+        #endregion
+
         public Grid             CurrentMap { get; private set; }
         public HashSet<Vector3> SpawnPosA  { get; private set; }
         public HashSet<Vector3> SpawnPosB  { get; private set; }
@@ -42,33 +53,66 @@ namespace UI
         {
             Instance = this;
 
-            var mapNames = MapDataUtils.GetAllMapName();
-            this.Dropdown.options = mapNames.Select(e => new TMP_Dropdown.OptionData(e)).ToList();
+            this.Refresh();
 
-            this.PlayButton.interactable = mapNames.Count > 0;
-
+            this.Dropdown.onValueChanged.AddListener(this.OnDropdownValueChanged);
             this.PlayButton.onClick.AddListener(this.OnClickStartGame);
-            this.BuildButton.onClick.AddListener(this.OnClickBuildMap);
+            this.CreateButton.onClick.AddListener(OnClickCreateMap);
+            this.EditButton.onClick.AddListener(this.OnClickEditMap);
+            this.DeleteButton.onClick.AddListener(this.OnClickDeleteMap);
+        }
+        private void OnDropdownValueChanged(int _)
+        {
+            if (this.Dropdown.options.Count == 0)
+            {
+                this.PlayButton.interactable   = false;
+                this.EditButton.interactable   = false;
+                this.DeleteButton.interactable = false;
+                return;
+            }
+
+            if (this.Dropdown.options[this.Dropdown.value] is not null)
+            {
+                this.PlayButton.interactable   = true;
+                this.EditButton.interactable   = true;
+                this.DeleteButton.interactable = true;
+            }
         }
 
-        private void OnClickBuildMap()
+        private static void OnClickCreateMap()
         {
             SceneManager.LoadScene("MapBuilderScene");
+        }
+
+        private void OnClickEditMap()
+        {
+            BuilderTools.ForceBuildMap = this.Dropdown.options[this.Dropdown.value].text;
+            SceneManager.LoadScene("MapBuilderScene");
+        }
+
+        private void OnClickDeleteMap()
+        {
+            var mapName = this.Dropdown.options[this.Dropdown.value].text;
+            MapDataUtils.SaveMapData(mapName, null);
+            this.Refresh();
+            this.Dropdown.value = 0;
         }
 
         private void Start()
         {
             if (string.IsNullOrEmpty(ForcePlayingMap)) return;
-            this.PreSpawnMap();
-            (this.CurrentMap, this.SpawnPosA, this.SpawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(ForcePlayingMap));
-            this.PostSpawnMap();
-            this.gameObject.SetActive(false);
+            this.SpawnMap(ForcePlayingMap);
             ForcePlayingMap = null;
         }
 
         private void OnClickStartGame()
         {
             var mapName = this.Dropdown.options[this.Dropdown.value].text;
+            this.SpawnMap(mapName);
+        }
+
+        private void SpawnMap(string mapName)
+        {
             this.PreSpawnMap();
             (this.CurrentMap, this.SpawnPosA, this.SpawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(mapName));
             this.PostSpawnMap();
@@ -117,5 +161,14 @@ namespace UI
 
             FindObjectOfType<CameraController>().WrapBounds(bounds);
         }
+
+        private void Refresh()
+        {
+            var mapNames = MapDataUtils.GetAllMapName();
+            this.Dropdown.options = mapNames.Select(e => new TMP_Dropdown.OptionData(e)).ToList();
+
+            this.OnDropdownValueChanged(0);
+        }
     }
+
 }
