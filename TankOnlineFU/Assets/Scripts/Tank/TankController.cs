@@ -1,5 +1,6 @@
 namespace Tank
 {
+
     using System.Threading.Tasks;
     using Bullet;
     using Entity;
@@ -30,6 +31,9 @@ namespace Tank
         [field: SerializeField]
         public ControlKeymap Keymap { get; set; }
 
+        [field: SerializeField]
+        public ParticleSystem BoomVfx { get; private set; }
+
         private float lastFire;
 
         public Direction Direction
@@ -57,7 +61,7 @@ namespace Tank
             }
         }
 
-        public int Health { get; set; } = 100;
+        public int Health { get; set; } = 20;
 
         public SpriteRenderer SpriteRenderer { get; private set; }
 
@@ -76,7 +80,7 @@ namespace Tank
 
         private void Update()
         {
-            this.SliderHp.value = this.Health / 100f;
+            this.SliderHp.value = this.Health / 20f;
         }
 
         private void FixedUpdate()
@@ -109,8 +113,9 @@ namespace Tank
 
             if (this.Health <= 0)
             {
-                Destroy(this.gameObject);
+                this.BoomVfx.Play(true);
                 await Task.Delay(1000);
+                Destroy(this.gameObject);
                 MapChooser.Instance.gameObject.SetActive(true);
             }
         }
