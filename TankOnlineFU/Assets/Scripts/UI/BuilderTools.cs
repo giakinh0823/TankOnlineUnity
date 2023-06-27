@@ -52,13 +52,45 @@ namespace UI
             this.SaveButton.onClick.AddListener(this.OnClickSaveMap);
             this.PlayButton.onClick.AddListener(this.OnClickPlayMap);
             this.BackButton.onClick.AddListener(OnClickBack);
+
+            if (!string.IsNullOrWhiteSpace(ForceBuildMap))
+            {
+                this.LoadMap(ForceBuildMap);
+                ForceBuildMap = null;
+            }
         }
 
         private void LoadMap(string mapName)
         {
             var (grid, spawnPosA, spawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(mapName));
-            
-            
+
+            var deserializedTilemaps = grid.GetComponentsInChildren<Tilemap>();
+
+            foreach (var deserializedTilemap in deserializedTilemaps)
+            {
+                foreach (var cellPos in deserializedTilemap.cellBounds.allPositionsWithin)
+                {
+                    var tile = deserializedTilemap.GetTile(cellPos);
+                    if (tile != null)
+                    {
+                        this.Tilemap.SetTile(cellPos, tile);
+                    }
+                }
+            }
+
+            foreach (var cellPos in spawnPosA.Select(pos => grid.WorldToCell(pos)))
+            {
+                this.Tilemap.SetTile(cellPos, this.MapBuilder.SpawnA);
+            }
+
+            foreach (var cellPos in spawnPosB.Select(pos => grid.WorldToCell(pos)))
+            {
+                this.Tilemap.SetTile(cellPos, this.MapBuilder.SpawnB);
+            }
+
+            this.TextFieldMapName.text = mapName;
+
+            Destroy(grid.gameObject);
         }
 
         private static void OnClickBack()
@@ -113,7 +145,18 @@ namespace UI
                 this.Tilemap.SetTile(cellPos, null);
             }
 
-            Camera.main!.orthographicSize = Mathf.Clamp(Camera.main!.orthographicSize + Input.mouseScrollDelta.y * Time.deltaTime * 5, 3f, 50f);
+            const float cameraMoveSensitive = 50.0f;
+            const float cameraZoomSensitive = 30.0f;
+
+            var editorCamera = Camera.main!;
+
+            if (Input.GetMouseButton(2))
+            {
+                var mouseOffset = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+                editorCamera.transform.position -= Time.deltaTime * cameraMoveSensitive * editorCamera.orthographicSize * mouseOffset;
+            }
+
+            editorCamera.orthographicSize = Mathf.Clamp(editorCamera.orthographicSize - Input.mouseScrollDelta.y * Time.deltaTime * cameraZoomSensitive, 3f, 30f);
         }
 
         private void OnClickButtonItem(Tile tile)
