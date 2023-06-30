@@ -1,6 +1,5 @@
 namespace Tank
 {
-
     using System.Threading.Tasks;
     using Bullet;
     using Entity;
@@ -16,23 +15,17 @@ namespace Tank
         public Sprite tankLeft;
         public Sprite tankRight;
 
-        [field: SerializeField]
-        public float Speed { get; private set; }
+        [field: SerializeField] public float Speed { get; private set; }
 
-        [field: SerializeField]
-        public Canvas Canvas { get; private set; }
+        [field: SerializeField] public Canvas Canvas { get; private set; }
 
-        [field: SerializeField]
-        public TMP_Text TextNickname { get; private set; }
+        [field: SerializeField] public TMP_Text TextNickname { get; private set; }
 
-        [field: SerializeField]
-        public Slider SliderHp { get; private set; }
+        [field: SerializeField] public Slider SliderHp { get; private set; }
 
-        [field: SerializeField]
-        public ControlKeymap Keymap { get; set; }
+        [field: SerializeField] public ControlKeymap Keymap { get; set; }
 
-        [field: SerializeField]
-        public ParticleSystem BoomVfx { get; private set; }
+        [field: SerializeField] public ParticleSystem BoomVfx { get; private set; }
 
         private float lastFire;
 
@@ -61,7 +54,9 @@ namespace Tank
             }
         }
 
-        public int Health { get; set; } = 20;
+        public int Life { get; set; } = 3;
+
+        public int Health { get; set; }         = 20;
 
         public SpriteRenderer SpriteRenderer { get; private set; }
 
@@ -112,6 +107,12 @@ namespace Tank
             this.Health -= damage;
 
             if (this.Health <= 0)
+            {
+                this.Life--;
+                if(this.Life > 0)   this.Health = 20;
+            }
+            
+            if (this.Life <= 0)
             {
                 this.BoomVfx.Play(true);
                 await Task.Delay(1000);
@@ -165,5 +166,4 @@ namespace Tank
             this.lastFire = Time.time;
         }
     }
-
 }

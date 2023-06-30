@@ -265,6 +265,7 @@ MonoBehaviour:
     <Right>k__BackingField: 0
     <Fire>k__BackingField: 0
   <BoomVfx>k__BackingField: {fileID: 7173107099351085403}
+  Life: 3
 --- !u!1 &3331200203929523059
 GameObject:
   m_ObjectHideFlags: 0

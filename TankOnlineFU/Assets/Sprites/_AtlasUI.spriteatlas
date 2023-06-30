@@ -70,6 +70,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 933c267e6d3fb4ea2a4b260f89d65c3b, type: 3}
   - {fileID: 21300000, guid: b9b3902f3badc424e9df4aa1cd1273c3, type: 3}
   - {fileID: 21300000, guid: b926739fbf5c84a078bf121eff8d3f62, type: 3}
+  - {fileID: 21300000, guid: 191728bf6157c2948934933b2b29367e, type: 3}
   - {fileID: 21300000, guid: 2f993bdf4b0e64da6b077420d0a60f0a, type: 3}
   m_PackedSpriteNamesToIndex:
   - enemy
@@ -92,6 +93,7 @@ SpriteAtlas:
   - button-select
   - flag
   - copyright
+  - Cuore1
   - powerup-tank
   m_RenderDataMap: {}
   m_Tag: _AtlasUI

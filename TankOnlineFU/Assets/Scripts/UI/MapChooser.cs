@@ -1,6 +1,5 @@
 namespace UI
 {
-
     using System.Collections.Generic;
     using System.Linq;
     using Entity;
@@ -42,12 +41,23 @@ namespace UI
 
         [field: SerializeField]
         public GameObject TankB { get; private set; }
-
+        
+        [field: SerializeField]
+        public RectTransform TankALife { get; private set; }
+        
+        [field: SerializeField]
+        public RectTransform TankBLife { get; private set; }
+        
+        [field: SerializeField]
+        public GameObject Heart { get; private set; }
         #endregion
 
         public Grid             CurrentMap { get; private set; }
         public HashSet<Vector3> SpawnPosA  { get; private set; }
         public HashSet<Vector3> SpawnPosB  { get; private set; }
+
+        private GameObject tankA;
+        private GameObject tankB;
 
         private void Awake()
         {
@@ -61,6 +71,19 @@ namespace UI
             this.EditButton.onClick.AddListener(this.OnClickEditMap);
             this.DeleteButton.onClick.AddListener(this.OnClickDeleteMap);
         }
+
+        private void Update()
+        {
+            if (this.tankA != null && this.TankALife.childCount > this.tankA.GetComponent<TankController>().Life)
+            {
+                Destroy(this.TankALife.GetChild(this.TankALife.childCount - 1).gameObject);
+            }
+            if (this.tankB != null && this.TankBLife.childCount > this.tankB.GetComponent<TankController>().Life)
+            {
+                Destroy(this.TankBLife.GetChild(this.TankBLife.childCount - 1).gameObject);
+            }
+        }
+
         private void OnDropdownValueChanged(int _)
         {
             if (this.Dropdown.options.Count == 0)
@@ -116,7 +139,19 @@ namespace UI
             this.PreSpawnMap();
             (this.CurrentMap, this.SpawnPosA, this.SpawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(mapName));
             this.PostSpawnMap();
-            this.gameObject.SetActive(false);
+            this.transform.GetChild(0).gameObject.SetActive(true);
+            for(var i = 1; i < this.transform.childCount; i++)
+            {
+                this.transform.GetChild(i).gameObject.SetActive(false);
+            }
+
+            for (var i = 0; i < this.tankA.GetComponent<TankController>().Life; i++)
+            {
+                var heartA = Instantiate(this.Heart, this.TankALife);
+                heartA.GetComponent<RectTransform>().localPosition = new Vector3(-75 + i * 75, 25, 0);
+                var heartB = Instantiate(this.Heart, this.TankBLife);
+                heartB.GetComponent<RectTransform>().localPosition = new Vector3(-75 - i * 75, 25, 0);
+            }
         }
 
         private void PreSpawnMap()
@@ -134,7 +169,8 @@ namespace UI
             var randomPosA = this.SpawnPosA.ElementAt(Random.Range(0, this.SpawnPosA.Count));
             var randomPosB = this.SpawnPosB.ElementAt(Random.Range(0, this.SpawnPosB.Count));
 
-            Instantiate(this.TankA, randomPosA, Quaternion.identity).GetComponent<TankController>().Keymap = new ControlKeymap()
+            this.tankA = Instantiate(this.TankA, randomPosA, Quaternion.identity);
+            this.tankA.GetComponent<TankController>().Keymap = new ControlKeymap()
             {
                 Up    = KeyCode.W,
                 Down  = KeyCode.S,
@@ -143,7 +179,8 @@ namespace UI
                 Fire  = KeyCode.Space,
             };
 
-            Instantiate(this.TankB, randomPosB, Quaternion.identity).GetComponent<TankController>().Keymap = new ControlKeymap()
+            this.tankB = Instantiate(this.TankB, randomPosB, Quaternion.identity);
+            this.tankB.GetComponent<TankController>().Keymap = new ControlKeymap()
             {
                 Up    = KeyCode.UpArrow,
                 Down  = KeyCode.DownArrow,
