@@ -106,18 +106,16 @@ namespace Tank
         {
             this.Health -= damage;
 
-            if (this.Health <= 0)
+            if (this.Health > 0) return;
+            this.Life--;
+            if (this.Life > 0) return;
+            this.BoomVfx.Play(true);
+            await Task.Delay(1000);
+            Destroy(this.gameObject);
+            MapChooser.Instance.transform.GetChild(0).gameObject.SetActive(false);
+            for (var i = 1; i < MapChooser.Instance.transform.childCount; i++)
             {
-                this.Life--;
-                if(this.Life > 0)   this.Health = 20;
-            }
-            
-            if (this.Life <= 0)
-            {
-                this.BoomVfx.Play(true);
-                await Task.Delay(1000);
-                Destroy(this.gameObject);
-                MapChooser.Instance.gameObject.SetActive(true);
+                MapChooser.Instance.transform.GetChild(i).gameObject.SetActive(true);
             }
         }
 

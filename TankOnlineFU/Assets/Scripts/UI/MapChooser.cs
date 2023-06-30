@@ -1,5 +1,6 @@
 namespace UI
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using Entity;
@@ -18,38 +19,28 @@ namespace UI
 
         #region Serialize Fields
 
-        [field: SerializeField]
-        public TMP_Dropdown Dropdown { get; private set; }
+        [field: SerializeField] public TMP_Dropdown Dropdown { get; private set; }
 
-        [field: SerializeField]
-        public Button PlayButton { get; private set; }
+        [field: SerializeField] public Button PlayButton { get; private set; }
 
-        [field: SerializeField]
-        public Button CreateButton { get; private set; }
+        [field: SerializeField] public Button CreateButton { get; private set; }
 
-        [field: SerializeField]
-        public Button EditButton { get; private set; }
+        [field: SerializeField] public Button EditButton { get; private set; }
 
-        [field: SerializeField]
-        public Button DeleteButton { get; private set; }
+        [field: SerializeField] public Button DeleteButton { get; private set; }
 
-        [field: SerializeField]
-        public MapBuilder MapBuilder { get; private set; }
+        [field: SerializeField] public MapBuilder MapBuilder { get; private set; }
 
-        [field: SerializeField]
-        public GameObject TankA { get; private set; }
+        [field: SerializeField] public GameObject TankA { get; private set; }
 
-        [field: SerializeField]
-        public GameObject TankB { get; private set; }
-        
-        [field: SerializeField]
-        public RectTransform TankALife { get; private set; }
-        
-        [field: SerializeField]
-        public RectTransform TankBLife { get; private set; }
-        
-        [field: SerializeField]
-        public GameObject Heart { get; private set; }
+        [field: SerializeField] public GameObject TankB { get; private set; }
+
+        [field: SerializeField] public RectTransform TankALife { get; private set; }
+
+        [field: SerializeField] public RectTransform TankBLife { get; private set; }
+
+        [field: SerializeField] public GameObject Heart { get; private set; }
+
         #endregion
 
         public Grid             CurrentMap { get; private set; }
@@ -77,11 +68,29 @@ namespace UI
             if (this.tankA != null && this.TankALife.childCount > this.tankA.GetComponent<TankController>().Life)
             {
                 Destroy(this.TankALife.GetChild(this.TankALife.childCount - 1).gameObject);
+                if (this.TankALife.childCount - 1 > 0)
+                {
+                    Destroy(this.tankA.gameObject);
+                    this.SpawnTankA();
+                    this.tankA.GetComponent<TankController>().Life = this.TankALife.childCount - 1;
+                }
             }
+
             if (this.tankB != null && this.TankBLife.childCount > this.tankB.GetComponent<TankController>().Life)
             {
                 Destroy(this.TankBLife.GetChild(this.TankBLife.childCount - 1).gameObject);
+                if (this.TankBLife.childCount - 1 > 0)
+                {
+                    Destroy(this.tankB.gameObject);
+                    this.SpawnTankB();
+                    this.tankB.GetComponent<TankController>().Life = this.TankBLife.childCount - 1;
+                }
             }
+        }
+
+        IEnumerator waiter()
+        {
+            yield return new WaitForSeconds(1);
         }
 
         private void OnDropdownValueChanged(int _)
@@ -140,7 +149,7 @@ namespace UI
             (this.CurrentMap, this.SpawnPosA, this.SpawnPosB) = this.MapBuilder.Deserialize(MapDataUtils.GetMapData(mapName));
             this.PostSpawnMap();
             this.transform.GetChild(0).gameObject.SetActive(true);
-            for(var i = 1; i < this.transform.childCount; i++)
+            for (var i = 1; i < this.transform.childCount; i++)
             {
                 this.transform.GetChild(i).gameObject.SetActive(false);
             }
@@ -166,28 +175,8 @@ namespace UI
 
         private void PostSpawnMap()
         {
-            var randomPosA = this.SpawnPosA.ElementAt(Random.Range(0, this.SpawnPosA.Count));
-            var randomPosB = this.SpawnPosB.ElementAt(Random.Range(0, this.SpawnPosB.Count));
-
-            this.tankA = Instantiate(this.TankA, randomPosA, Quaternion.identity);
-            this.tankA.GetComponent<TankController>().Keymap = new ControlKeymap()
-            {
-                Up    = KeyCode.W,
-                Down  = KeyCode.S,
-                Left  = KeyCode.A,
-                Right = KeyCode.D,
-                Fire  = KeyCode.Space,
-            };
-
-            this.tankB = Instantiate(this.TankB, randomPosB, Quaternion.identity);
-            this.tankB.GetComponent<TankController>().Keymap = new ControlKeymap()
-            {
-                Up    = KeyCode.UpArrow,
-                Down  = KeyCode.DownArrow,
-                Left  = KeyCode.LeftArrow,
-                Right = KeyCode.RightArrow,
-                Fire  = KeyCode.RightShift,
-            };
+            this.SpawnTankA();
+            this.SpawnTankB();
 
             var bounds = new Bounds();
 
@@ -199,6 +188,36 @@ namespace UI
             FindObjectOfType<CameraController>().WrapBounds(bounds);
         }
 
+        private void SpawnTankA()
+        {
+            var randomPosA = this.SpawnPosA.ElementAt(Random.Range(0, this.SpawnPosA.Count));
+
+            this.tankA = Instantiate(this.TankA, randomPosA, Quaternion.identity);
+            this.tankA.GetComponent<TankController>().Keymap = new ControlKeymap()
+            {
+                Up    = KeyCode.W,
+                Down  = KeyCode.S,
+                Left  = KeyCode.A,
+                Right = KeyCode.D,
+                Fire  = KeyCode.Space,
+            };
+        }
+
+        private void SpawnTankB()
+        {
+            var randomPosB = this.SpawnPosB.ElementAt(Random.Range(0, this.SpawnPosB.Count));
+
+            this.tankB = Instantiate(this.TankB, randomPosB, Quaternion.identity);
+            this.tankB.GetComponent<TankController>().Keymap = new ControlKeymap()
+            {
+                Up    = KeyCode.UpArrow,
+                Down  = KeyCode.DownArrow,
+                Left  = KeyCode.LeftArrow,
+                Right = KeyCode.RightArrow,
+                Fire  = KeyCode.RightShift,
+            };
+        }
+
         private void Refresh()
         {
             var mapNames = MapDataUtils.GetAllMapName();
@@ -207,5 +226,4 @@ namespace UI
             this.OnDropdownValueChanged(0);
         }
     }
-
 }
