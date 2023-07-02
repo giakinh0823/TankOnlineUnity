@@ -54,9 +54,9 @@ namespace Tank
             }
         }
 
-        public int Life { get; set; } = 3;
+        public int Life { get; set; }
 
-        public int Health { get; set; }         = 20;
+        public int Health { get; set; } = 20;
 
         public SpriteRenderer SpriteRenderer { get; private set; }
 
@@ -112,11 +112,7 @@ namespace Tank
             this.BoomVfx.Play(true);
             await Task.Delay(1000);
             Destroy(this.gameObject);
-            MapChooser.Instance.transform.GetChild(0).gameObject.SetActive(false);
-            for (var i = 1; i < MapChooser.Instance.transform.childCount; i++)
-            {
-                MapChooser.Instance.transform.GetChild(i).gameObject.SetActive(true);
-            }
+            MapChooser.Instance.LifeModeEnd();
         }
 
         private void Move(Direction direction)
